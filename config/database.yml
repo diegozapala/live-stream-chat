@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+
+development:
+  <<: *default
+  database: live_stream_chat_development
+
+test:
+  <<: *default
+  database: live_stream_chat_test
+  port: 5432
+
+production:
+  <<: *default
+  database: live_stream_chat_production
+  username: live_stream_chat
+  password: <%= ENV['URL_DATABASE'] %>
+
