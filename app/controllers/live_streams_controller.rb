@@ -13,7 +13,8 @@ class LiveStreamsController < ApplicationController
   def add_chat_message
     date = Time.now
     current_chat.add(date: date, message: params[:message])
-    @messages = [{date: params[:message]}]
+
+    @messages = [{date => params[:message]}]
 
     send_cable(@messages)
     redirect_to live_stream_path(current_live_stream)
