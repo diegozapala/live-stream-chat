@@ -6,13 +6,15 @@ class LiveStreamsController < ApplicationController
   end
 
   def show
-    @live_stream = LiveStream.find_by(id: params[:id])
+    @live_stream = LiveStream.find(params[:id])
     @messages = current_chat.all_messages
+
+    current_chat.add_access(user: current_user, date: formatted_date)
   end
 
   def add_chat_message
-    date = Time.now.strftime("%d-%m-%Y %H:%M:%S")
-    current_chat.add(user: current_user, date: date, message: params[:message])
+    date = formatted_date
+    current_chat.add_message(user: current_user, date: date, message: params[:message])
 
     @messages = [{date => params[:message]}]
 
@@ -22,12 +24,8 @@ class LiveStreamsController < ApplicationController
 
   private
 
-  def current_live_stream
-    @live_stream || LiveStream.find(params[:live_stream_id])
-  end
-
-  def current_chat
-    Chat.new(live_stream: current_live_stream)
+  def formatted_date
+    Time.now.strftime("%d-%m-%Y %H:%M:%S")
   end
 
 end

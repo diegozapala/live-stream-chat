@@ -49,19 +49,31 @@ class Chat
   end
 
   def all_messages
-    redis_db.hgetall(key)
+    redis_db.hgetall(key).select{ |k,_| k.include?("message") }
+  end
+
+  def all_access
+    redis_db.hgetall(key).select{ |k,_| k.include?("access") }
   end
 
   def total_messages
-    redis_db.hkeys(key).count
+    all_messages.count
+  end
+
+  def number_accesses
+    all_access.values.uniq.count
   end
 
   def message(user:, date:)
     redis_db.hget(key, "#{user.id}_#{date}")
   end
 
-  def add(user:, date:, message:)
-    redis_db.hset(key, "#{user.id}_#{date}", message)
+  def add_message(user:, date:, message:)
+    redis_db.hset(key, "message_#{user.id}_#{date}", message)
+  end
+
+  def add_access(user:, date:)
+    redis_db.hset(key, "access_#{date}", user.id)
   end
 
   def destroy!

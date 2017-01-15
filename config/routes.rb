@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'live_streams#index'
 
   resources :live_streams, only: [:new, :create, :show, :index]
+  resources :reports, only: [:create, :show, :index]
 
   post "add_chat_message/:live_stream_id", to: "live_streams#add_chat_message", as: :add_chat_message
 
