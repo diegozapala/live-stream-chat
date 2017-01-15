@@ -1,8 +1,8 @@
 class Chat
 
-  KEY_PARSER = /chat_(?<live_stream_id>[0-9]+)_(?<user_id>[0-9]+)/
+  KEY_PARSER = /chat_(?<live_stream_id>[0-9]+)/
 
-  attr_reader :live_stream, :user
+  attr_reader :live_stream
 
   def self.find_all(*keys)
     keys.flatten!
@@ -14,14 +14,13 @@ class Chat
   end
 
   def self.find(key)
-    live_stream_id, user_id = parse_key(key)
+    live_stream_id = parse_key(key)
 
     live_stream = LiveStream.find_by(id: live_stream_id)
-    user        = User.find_by(id: user_id)
 
-    return if user.nil? || live_stream.nil?
+    return if live_stream.nil?
 
-    new(live_stream: live_stream, user: user)
+    new(live_stream: live_stream)
   end
 
   def self.redis_db
@@ -37,13 +36,12 @@ class Chat
     redis_db.keys("chat_*")
   end
 
-  def initialize(live_stream:, user:)
+  def initialize(live_stream:)
     @live_stream = live_stream
-    @user = user
   end
 
   def key
-    "chat_#{live_stream.id}_#{user.id}"
+    "chat_#{live_stream.id}"
   end
 
   def persisted?
@@ -58,12 +56,12 @@ class Chat
     redis_db.hkeys(key).count
   end
 
-  def message(date:)
-    redis_db.hget(key, date)
+  def message(user:, date:)
+    redis_db.hget(key, "#{user.id}_#{date}")
   end
 
-  def add(date:, message:)
-    redis_db.hset(key, date, message)
+  def add(user:, date:, message:)
+    redis_db.hset(key, "#{user.id}_#{date}", message)
   end
 
   def destroy!

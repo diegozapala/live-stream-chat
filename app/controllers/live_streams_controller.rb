@@ -11,8 +11,8 @@ class LiveStreamsController < ApplicationController
   end
 
   def add_chat_message
-    date = Time.now
-    current_chat.add(date: date, message: params[:message])
+    date = Time.now.strftime("%d-%m-%Y %H:%M:%S")
+    current_chat.add(user: current_user, date: date, message: params[:message])
 
     @messages = [{date => params[:message]}]
 
@@ -27,7 +27,7 @@ class LiveStreamsController < ApplicationController
   end
 
   def current_chat
-    Chat.new(live_stream: current_live_stream, user: current_user)
+    Chat.new(live_stream: current_live_stream)
   end
 
 end
