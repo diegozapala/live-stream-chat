@@ -1,1 +1,17 @@
 <h1><%= @live_stream.title %></h1>
+
+<%= form_tag(add_chat_message_path(@live_stream), :id => "new_message_form") do %>
+
+  <%= text_area_tag "message", nil, class: "form-control" %>
+  <%= button_tag "Enviar", class: "btn btn-default", data: { disable_with: "Aguarde..." } %>
+
+<% end %>
+
+
+<div class="ui one cards thread" data-number="<%= params[:id] %>">
+  <% @messages.each do |date, message| %>
+    <div>
+      <%= date %> - <%= message %>
+    </div>
+  <% end %>
+</div>
