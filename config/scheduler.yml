@@ -1,0 +1,4 @@
+generate_daily_award:
+  cron: "58 23 * * *"
+  class: "GenerateDailyAwardWorker"
+  description: "Exemplo de job agendado"

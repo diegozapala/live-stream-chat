@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 3.2'
 gem "hiredis"
 gem 'devise'
-# gem 'bcrypt', '~> 3.1.7'
+gem 'sidekiq-scheduler', '~> 2.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri

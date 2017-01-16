@@ -15,7 +15,7 @@ class Chat
   end
 
   def self.messages(chat_key)
-    redis_db.hkeys(chat_key).select{ |k,_| k.include?("message") }
+    redis_db.hkeys(chat_key).select{ |k| k.include?("message") }
   end
 
   def initialize(live_stream:, date:)
