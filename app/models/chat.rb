@@ -1,47 +1,30 @@
 class Chat
 
-  KEY_PARSER = /chat_(?<live_stream_id>[0-9]+)/
-
-  attr_reader :live_stream
-
-  def self.find_all(*keys)
-    keys.flatten!
-    keys.reduce([]) { |acc, elem| acc << find(elem) }.compact
-  end
-
-  def self.all
-    find_all(keys)
-  end
-
-  def self.find(key)
-    live_stream_id = parse_key(key)
-
-    live_stream = LiveStream.find_by(id: live_stream_id)
-
-    return if live_stream.nil?
-
-    new(live_stream: live_stream)
-  end
+  attr_reader :live_stream, :key_date
 
   def self.redis_db
     Redis.current
-  end
-
-  def self.parse_key(key)
-    parsed_ids = KEY_PARSER.match(key)
-    parsed_ids&.captures
   end
 
   def self.keys
     redis_db.keys("chat_*")
   end
 
-  def initialize(live_stream:)
+  def self.find_date(date:)
+    keys.select{ |k| k.split("_").include?(date) }
+  end
+
+  def self.messages(chat_key)
+    redis_db.hkeys(chat_key).select{ |k,_| k.include?("message") }
+  end
+
+  def initialize(live_stream:, date:)
     @live_stream = live_stream
+    @key_date = date
   end
 
   def key
-    "chat_#{live_stream.id}"
+    "chat_#{live_stream.id}_#{key_date}"
   end
 
   def persisted?
@@ -84,5 +67,9 @@ class Chat
 
   def redis_db
     self.class.redis_db
+  end
+
+  def formatted_date
+    Time.now.strftime("%d-%m-%Y_%H:%M:%S")
   end
 end

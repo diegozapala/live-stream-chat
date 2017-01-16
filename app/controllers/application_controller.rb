@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_chat
-    Chat.new(live_stream: current_live_stream)
+    Chat.new(live_stream: current_live_stream, date: formatted_date(current_live_stream.created_at))
+  end
+
+  def formatted_date(date = Time.now)
+    date.strftime("%d-%m-%Y_%H:%M:%S")
   end
 
 end
