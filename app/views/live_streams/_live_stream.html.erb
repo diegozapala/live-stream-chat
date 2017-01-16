@@ -1,1 +1,4 @@
-<li><%= link_to "Entre #{live_stream.title}", live_stream_path(live_stream) %></li>
+<div>
+  <li><%= link_to "Entre #{live_stream.title}", live_stream_path(live_stream) %></li>
+  <%= link_to "Gerar relatório", create_report_path(live_stream), :method => :post %>
+</div>
