@@ -1,0 +1,6 @@
+<tr>
+  <th scope="row"><%= link_to(report.id, report_path(report) ) %></th>
+  <td><%= link_to(report.live_stream.title, live_stream_path(report.live_stream)) %></td>
+  <td><%= report.number_accesses %></td>
+  <td><%= report.number_messages_sent %></td>
+</tr>

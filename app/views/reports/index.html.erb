@@ -1,0 +1,26 @@
+<div class = "container">
+  <% if current_user.admin %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Relatórios</div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Live Stream</th>
+            <th>Qt. Usuários Online</th>
+            <th>Qt. Mensagens Enviadas</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render @reports %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="alert alert-danger" role="alert">
+      Ops! Você não tem permissão de acesso aqui!
+    </div>
+  <% end %>
+</div>
