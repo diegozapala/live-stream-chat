@@ -18,9 +18,9 @@ class Chat
     redis_db.hkeys(chat_key).select{ |k| k.include?("message") }
   end
 
-  def initialize(live_stream:, date: nil)
+  def initialize(live_stream:)
     @live_stream = live_stream
-    @key_date = date || live_stream.created_at.strftime("%d-%m-%Y_%H:%M:%S")
+    @key_date = formatted_date(date: live_stream.created_at)
   end
 
   def key
@@ -43,18 +43,22 @@ class Chat
     all_access.values.uniq.count
   end
 
-  def add_message(user:, date:, message:)
-    redis_db.hset(key, "message_#{user.id}_#{date}", message)
+  def add_message(user:, message:)
+    redis_db.hset(key, "message_#{user.id}_#{formatted_date}", message)
   end
 
-  def add_access(user:, date:)
-    redis_db.hset(key, "access_#{date}", user.id)
+  def add_access(user:)
+    redis_db.hset(key, "access_#{formatted_date}", user.id)
   end
 
   private
 
   def redis_db
     self.class.redis_db
+  end
+
+  def formatted_date(date: Time.now)
+    date.strftime("%d-%m-%Y_%H:%M:%S")
   end
 
 end

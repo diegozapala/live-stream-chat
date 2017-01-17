@@ -3,15 +3,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def current_live_stream
-    @live_stream || LiveStream.find(params[:live_stream_id])
+    @live_stream || LiveStream.find_by(id: params[:live_stream_id])
   end
 
   def current_chat
-    Chat.new(live_stream: current_live_stream, date: formatted_date(current_live_stream.created_at))
-  end
-
-  def formatted_date(date = Time.now)
-    date.strftime("%d-%m-%Y_%H:%M:%S")
+    return unless current_live_stream.present?
+    Chat.new(live_stream: current_live_stream)
   end
 
 end

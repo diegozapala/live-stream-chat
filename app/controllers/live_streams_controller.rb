@@ -9,14 +9,13 @@ class LiveStreamsController < ApplicationController
     @live_stream = LiveStream.find(params[:id])
     @messages = current_chat.all_messages
 
-    current_chat.add_access(user: current_user, date: formatted_date)
+    current_chat.add_access(user: current_user)
   end
 
   def add_chat_message
-    date = formatted_date
-    current_chat.add_message(user: current_user, date: date, message: params[:message])
+    message = current_chat.add_message(user: current_user, message: params[:message])
 
-    @messages = [{date => params[:message]}]
+    @messages = [params[:message]]
 
     send_cable(@messages)
     redirect_to live_stream_path(current_live_stream)

@@ -1,7 +1,7 @@
 <div class="ui one cards thread">
-  <% messages.first.each do |date, message| %>
+  <% messages.each do |message| %>
     <div>
-      <%= date %> - <%= message %>
+      <%= message %>
     </div>
   <% end %>
 </div>
