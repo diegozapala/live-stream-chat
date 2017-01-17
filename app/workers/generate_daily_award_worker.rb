@@ -27,7 +27,7 @@ class GenerateDailyAwardWorker
 
   def find_days_chat_keys
     date = Time.now.strftime("%d-%m-%Y")
-    Chat.find_date(date: date)
+    Chat.find_by_date(date: date)
   end
 
   def get_all_messages(keys)
