@@ -39,11 +39,11 @@ Then in the browser run:
 
 Sign in with:
 
-  * For admin user
+  * For admin user:
 
       email: teste_admin@teste.com.br, password: testes
 
-  * For common user
+  * For common user:
 
       email: teste1@teste.com.br, password: testes
 
@@ -51,23 +51,25 @@ Sign in with:
 
 Use the chat:
 
-  1 - Choose a live stream
+  1 - Choose a live stream.
 
-  2 - Write in the text box
+  2 - Write in the text box.
 
-  3 - Click the button
+  3 - Click the button:
 
       "Enviar"
 
 Generate report:
 
-  1 - Sign in with admin user
-  2 - Choose a live stream
-  3 - Click the link
+  1 - Sign in with admin user.
+
+  2 - Choose a live stream.
+
+  3 - Click the link:
 
       "Encerrar Live Stream"
 
-  * All reports can be accessed in menu bar in the link
+  * All reports can be accessed in menu bar in the link:
 
       "Relatórios"
 
