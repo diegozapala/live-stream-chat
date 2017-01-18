@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.create(name: "Teste Admin", email: "teste_admin@teste.com.br", password: "testes", admin: true)
+
+(1..4).each do |i|
+  User.create(name: "Teste #{i}", email: "teste#{i}@teste.com.br", password: "testes")
+  LiveStream.create(title: "Live Stream #{i}")
+end

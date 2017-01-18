@@ -35,7 +35,7 @@ class GenerateDailyAwardWorker
   end
 
   def get_only_user_id(message_kyes)
-    message_kyes.map { |message| message.split("_")[1] }
+    message_kyes.map { |message| message.split("_").last }
   end
 
   def group_by_id(user_ids)
