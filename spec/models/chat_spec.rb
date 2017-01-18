@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Chat, type: :model do
 
-  let!(:user) { User.create!(email: "teste@teste.com.br", password: "testes") }
+  let!(:user) { User.create!(name: "Teste", email: "teste@teste.com.br", password: "testes") }
   let!(:live_stream) { LiveStream.create!(title: "Live Stream 1") }
 
   let!(:chat) { Chat.new(live_stream: live_stream) }

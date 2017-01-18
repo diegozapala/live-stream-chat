@@ -44,7 +44,10 @@ class Chat
   end
 
   def add_message(user:, message:)
-    redis_db.hset(key, "message_#{user.id}_#{formatted_date}", message)
+    date = formatted_date
+    redis_db.hset(key, "message_#{user.id}_#{date}", message)
+
+    {"message_#{user.id}_#{date}" => message}
   end
 
   def add_access(user:)

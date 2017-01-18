@@ -1,4 +1,5 @@
 App.cable.subscriptions.create('MessagesChannel', {
+  alert('teste')
   received: function(data) {
     var list      = $('.numbers');
     var thread    = $('.thread');
@@ -12,7 +13,7 @@ App.cable.subscriptions.create('MessagesChannel', {
     // prepend to list of ongoing threads
     if (list.length) {
       latest.remove();
-      list.prepend(data.html);
+      list.prop(data.html);
     }
 
     $('.message:first').transition('flash');

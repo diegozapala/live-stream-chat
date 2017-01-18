@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DailyAward, type: :model do
 
-  let!(:user) { User.create!(email: "teste@teste.com.br", password: "testes") }
+  let!(:user) { User.create!(name: "Teste", email: "teste@teste.com.br", password: "testes") }
   subject { DailyAward.new(user: user, number_messages_sent: 5) }
 
   it "should validate presence of user" do

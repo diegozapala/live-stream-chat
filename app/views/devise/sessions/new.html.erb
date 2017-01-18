@@ -5,11 +5,11 @@
 
       <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "E-mail" %>
       <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Senha" %>
-      <%= f.submit "Login", :class => "login loginmodal-submit" %>
+      <%= f.submit "Entrar", :class => "login loginmodal-submit" %>
     <% end %>
 
     <div class="login-help">
-      <%= link_to "Register", new_registration_path(resource_name) %>
+      <%= link_to "Registrar", new_registration_path(resource_name) %>
     </div>
   </div>
 </div>
