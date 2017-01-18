@@ -14,6 +14,7 @@ gem 'redis', '~> 3.2'
 gem "hiredis"
 gem 'devise'
 gem 'sidekiq-scheduler', '~> 2.0'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -30,6 +31,10 @@ group :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'rspec-sidekiq'
   gem 'rails-controller-testing'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
