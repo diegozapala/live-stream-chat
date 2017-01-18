@@ -1,4 +1,4 @@
-App.cable.subscriptions.create('MessagesChannel', {
+/* App.cable.subscriptions.create('MessagesChannel', {
   alert('teste')
   received: function(data) {
     var list      = $('.numbers');
@@ -18,4 +18,4 @@ App.cable.subscriptions.create('MessagesChannel', {
 
     $('.message:first').transition('flash');
   }
-});
+}); #/
