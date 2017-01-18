@@ -14,6 +14,6 @@ test:
 
 production:
   <<: *default
-  database: live_stream_chat_production
-  username: live-stream-chat
+  database: <%= ENV['DATABASE'] %>
+  username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
