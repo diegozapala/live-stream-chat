@@ -48,23 +48,23 @@ RSpec.describe ReportsController, :type => :controller do
   describe "POST #create" do
     context "whith valid params" do
       it "responds successfully with an HTTP 302 status code" do
-        post :create, params: { "live_stream_id]" => live_stream.id }
+        post :create, params: { "live_stream_id" => live_stream.id }
         expect(response).to have_http_status(302)
       end
 
       it "renders the show template" do
-        post :create, params: { "live_stream_id]" => live_stream.id }
+        post :create, params: { "live_stream_id" => live_stream.id }
         expect(response).to redirect_to "/reports/#{Report.last.id}"
       end
     end
     context "whith invalid params" do
       it "responds with an HTTP 302 status code" do
-        post :create, params: { "live_stream_id]" => 0 }
+        post :create, params: { "live_stream_id" => 0 }
         expect(response).to have_http_status(302)
       end
 
       it "renders the show template" do
-        post :create, params: { "live_stream_id]" => 0 }
+        post :create, params: { "live_stream_id" => 0 }
         expect(response).to redirect_to "/"
       end
     end
