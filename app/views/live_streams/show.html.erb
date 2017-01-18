@@ -5,6 +5,14 @@
 
         <div class="panel-heading">
           <span class="glyphicon glyphicon-comment"></span> Comentários
+
+          <% if current_user.admin %>
+            <div class="btn-group pull-right">
+              <span class="glyphicon glyphicon-off"></span>
+              <%= link_to("Encerrar Live Stream", create_report_path(@live_stream), method: :post, class: "nounderline") %>
+            </div>
+          <% end %>
+
         </div>
 
         <div class="panel-body body-panel">

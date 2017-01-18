@@ -1,4 +1,13 @@
 @import url("https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+a.nounderline
+{
+ text-decoration:none;
+ color: #fff;
+}
+a.nounderline:hover
+{
+ text-decoration: underline;
+}
 .panel-primary>.panel-heading{
     color: #fff;
     background-color: #777;

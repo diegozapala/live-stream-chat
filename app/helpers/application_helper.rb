@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def message_user(key_message)
-    user_id = key_message.split("_")[1]
+    user_id = key_message.split("_").last
     User.find_by(id: user_id)
   end
 
