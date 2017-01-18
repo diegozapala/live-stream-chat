@@ -73,7 +73,7 @@ Generate report:
 
 Generate daily awards:
 
-  1 - Start the sidekiq:
+  1 - Start "sidekiq":
 
       $ sidekiq
 
@@ -81,6 +81,6 @@ Generate daily awards:
 
       $ rails c
 
-  3 - Call the worker:
+  3 - Call "worker":
 
       GenerateDailyAwardWorker.perform_async()
